@@ -29,7 +29,7 @@
       <form method="POST" action="{{ route('prosesRegistrasi') }}" id="myForm">
         @csrf
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="username"  value="{{ old('username') }}" name="username">
+          <input type="text" class="form-control" placeholder="Username"  value="{{ old('username') }}" name="username">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>

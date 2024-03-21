@@ -10,6 +10,8 @@
 
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
+      <!-- Feather Icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -32,127 +34,68 @@
 </head>
 
 <body>
-    <!-- Topbar Start -->
-    <div class="container-fluid bg-primary py-3 d-none d-md-block">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 text-center text-lg-left mb-2 mb-lg-0">
-                    <div class="d-inline-flex align-items-center">
-                        <a class="text-white pr-3" href="">FAQs</a>
-                        <span class="text-white">|</span>
-                        <a class="text-white px-3" href="">Help</a>
-                        <span class="text-white">|</span>
-                        <a class="text-white pl-3" href="">Support</a>
-                    </div>
-                </div>
-                <div class="col-md-6 text-center text-lg-right">
-                    <div class="d-inline-flex align-items-center">
-                        <a class="text-white px-3" href="">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a class="text-white px-3" href="">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a class="text-white px-3" href="">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-                        <a class="text-white px-3" href="">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a class="text-white pl-3" href="">
-                            <i class="fab fa-youtube"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Topbar End -->
 
-
-    <!-- Navbar Start -->
-    <div class="container-fluid position-relative nav-bar p-0">
-        <div class="container-lg position-relative p-0 px-lg-3" style="z-index: 9;">
-            <nav class="navbar navbar-expand-lg bg-white navbar-light shadow p-lg-0">
-                <a href="index.html" class="navbar-brand d-block d-lg-none">
-                    <h1 class="m-0 display-4 text-primary"><span class="text-secondary">Website</span>Gallery</h1>
-                </a>
-                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                   
-                    <a href="index.html" class="navbar-brand mx-5 d-none d-lg-block">
-                        <h1 class="m-0 display-4 text-primary"><span class="text-secondary">Website</span>Gallery</h1>
-                    </a>
-                    <div class="navbar-nav mr-center py-0">
-                        <a href="#" class="nav-item nav-link">Home</a>
-                        <a href="{{ ('register') }}" class="nav-item nav-link ">Register</a>
-                        <a href="{{ ('login') }}" class="nav-item nav-link">Login</a>
-                    </div>
-                </div>
-            </nav>
-        </div>
+ <nav>
+    <div class="container">
+      <div class="logo">
+        <img src="{{ asset('assets/images/Logo.png') }}" alt="Logo">
+      </div>
+      <ul class="nav-menu">
+        <li><a href="#">Beranda</a></li>
+        <li><a href="{{ ('register') }}" class="register">Register</a></li>
+        <li><a href="{{ ('login') }}" class="register">Login</a></li>
+      </ul>
     </div>
-    <!-- Navbar End -->
+  </nav>
 
 
     <!-- Header Start -->
-    <div class="jumbotron jumbotron-fluid page-header" style="margin-bottom: 90px;">
-        <div class="container text-center py-5">
-            <h1 class="text-white display-3 mt-lg-5">Gallery</h1>
-            <div class="d-inline-flex align-items-center text-white">
-                <p class="m-0"><a class="text-white" href="">Home</a></p>
-                <i class="fa fa-circle px-3"></i>
-                <p class="m-0">Gallery</p>
-            </div>
-        </div>
+
+        <section class="wallpaper" id="beranda">
+    <div class="containerr">
+      <h1>Preserve moments, 
+        <br>Cheries the memories</h1>
     </div>
+  </section>
     <!-- Header End -->
 
-<h2 id="terbaru">Recent Photos</h2>
-<section class="terbaru-section" id="terbaru">
-    {{-- @foreach ($gallerys as $gallery) --}}
-    <div>
-        <a href="" data-lightbox="models" data-title="Judul Gambar 1">
-        <img src="" alt="">
-    </a>
+  <h2  id="recent">Recent Photos</h2>
+  <section class="recent-section" id="recent">
+    @foreach ($gallerys as $gallery) 
+    <div class="card">
+       <a href="{{ Storage::url($gallery->lokasiFile) }}" data-lightbox="models" data-title="Judul Gambar 1">
+      <img src="{{ Storage::url($gallery->lokasiFile) }}">
+      </a>
 
-   <div class="card-body">
-    <p>| By </p>
-    <h5 class="card-title"></h5>
-   </div>
+      {{-- <div class="card-body">
+        <p> {{ $gallery->created_at->format('M d Y') }} | By {{ $gallery->user->name }}</p>
+        <h5 class="card-title">{{ $gallery->nama }}</h5>
+        
+        
+      </div> --}}
     </div>
+    @endforeach
 
-</section>
+  </section>
    
-     <!-- Footer Start -->
-    <div class="container-fluid footer bg-light py-5" style="margin-top: 90px;">
-        <div class="container text-center py-5">
-            <div class="row">
-                <div class="col-12 mb-4">
-                    <a href="index.html" class="navbar-brand m-0">
-                        <h1 class="m-0 mt-n2 display-4 text-primary"><span class="text-secondary">Website</span>Gallery</h1>
-                    </a>
-                </div>
-                <div class="col-12 mb-4">
-                    <a class="btn btn-outline-secondary btn-social mr-2" href="#"><i class="fab fa-twitter"></i></a>
-                    <a class="btn btn-outline-secondary btn-social mr-2" href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a class="btn btn-outline-secondary btn-social mr-2" href="#"><i class="fab fa-linkedin-in"></i></a>
-                    <a class="btn btn-outline-secondary btn-social" href="#"><i class="fab fa-instagram"></i></a>
-                </div>
-                <div class="col-12">
-                    <p class="m-0">&copy; <a href="#">Domain</a>. All Rights Reserved. Designed by <a href="https://htmlcodex.com">Aliraa</a>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div> 
-    <!-- Footer End --> 
+          <!-- Footer Start -->
+   
+   <footer>
+      <div class="social">
+        <a href="#"><i class="fa-brands fa-facebook fa-lg"></i></a>
+        <a href="https://www.instagram.com/nrulfavzyh?igsh=NTc4MTIwNjQ2YQ=="><i class="fa-brands fa-instagram fa-lg"></i></a>
+        <a href="https://wa.link/ng57no"><i class="fa-brands fa-whatsapp fa-lg"></i></a>
+        <a href=""><i class="fa-brands fa-twitter fa-lg"></i></a>
+      </div>
 
+      <div class="links">
+        <p>Temukan Berbagai Foto yang Kamu Suka!</p>
+      </div>
 
-    <!-- Back to Top -->
-    <a href="#" class="btn btn-secondary px-2 back-to-top"><i class="fa fa-angle-double-up"></i></a>
+      <div class="credit">
+        <p>Created by <a href="https://github.com/aliraaswrld">Alira Daff</a>. | &copy; 2024.</p>
+      </div>
+    </footer>
 
 
     <!-- JavaScript Libraries -->

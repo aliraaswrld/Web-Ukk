@@ -21,16 +21,19 @@
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
-  <!-- Navbar -->
+   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
     <li class="nav-item"> <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a> </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="/layout/index" class="nav-link">Landing Page</a>
+      <li class="nav-item d-none d-sm-inline-block active">
+        <a href="{{ ('dashboard') }}" class="nav-link">Beranda</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block ">
+        <a href="#" class="nav-link">Data Foto</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block active">
-        <a href="#" class="nav-link">Admin</a>
+        <a href="{{ ('tambahGallery') }}" class="nav-link">Tambah Foto</a>
       </li>
     </ul>
         </ul>
@@ -57,10 +60,11 @@
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
-   <aside class="main-sidebar sidebar-dark-primary elevation-4">
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="#" class="brand-link">
-      <span class="brand-text font-weight-light">Admin Gallery</span>
+        
+      <span class="brand-text font-weight-light">Welcome to Your Gallery</span>
     </a>
 
     <!-- Sidebar -->
@@ -68,71 +72,13 @@
       <!-- Sidebar user (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="{{ asset('assets/images/admin-profile.jpeg') }}" class="img-circle elevation-2" alt="User Image">
+          <img src="{{ asset('assets/images/Logo.png') }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Admin</a>
+          <a href="#" class="d-block">{{ auth()->user()->namaLengkap }}</a>
         </div>
       </div>
 
-      <!-- Sidebar Menu -->
-      <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <li class="nav-item">
-            <a href="/admin/customer" class="nav-link">
-              <p>
-                 Manage Customer
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <p>
-                Product
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="/admin/addproduk" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Add Product</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="/admin/produk" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Manage Product</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <p>
-                Gallery
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="/admin/addgallery" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Add Gallery</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="/admin/gallery" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Manage Gallery</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          
-        </ul>
-      </nav>
-      <!-- /.sidebar-menu -->
     </div>
   </aside>
 
@@ -145,7 +91,7 @@
           <div class="col-sm-6">
             <h1>Gallery</h1>
             <br>
-            <a class="btn btn-secondary" href="/admin/addgallery" > Add Image Gallery </a>
+            <a class="btn btn-secondary" href="/admin/tambahGallery" > Tambah Gambar </a>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -162,22 +108,32 @@
                         <thead>
                             <tr>
                                 <th>No.</th>
+                                 <th>Judul Foto</th>
+                                 <th>Deskripsi Foto</th>
                                 <th>Gambar</th>
-                                <th>Deskripsi</th>
+                                <th>Waktu</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
+                           @if ($gallerys)
                             @foreach ($gallerys as $key => $gallery)
                             <tr>
                                 <td>{{  $key + 1}}</td>
-                                <td><img width="100" height="100" src="{{ Storage::url($gallery->gambar) }}" alt=""></td>
-                                <td>{{ $gallery->description }}</td>
-                                  <td><a class="btn btn-success" href="{{ route('edit',$gallery->id) }}">Edit </a> 
-                                     <a class="btn btn-danger" href="{{ route('hapus-gallery',$gallery->id) }}">Delete</a> 
-                                  </td>          
+                                <td>{{ $gallery->judulFoto }}</td>
+                                <td>{{ $gallery->deskripsiFoto }}</td>
+                                <td><img width="100" height="100" src="{{ Storage::url($gallery->lokasiFile) }}" alt=""></td>
+                                <td>{{ $gallery->created_at->format('d/m/Y') }}</td>
+                                <td><a class="btn btn-success" href="{{ route('edit',$gallery->id) }}">Edit </a> 
+                                     <a class="btn btn-danger" href="{{ route('HapusGallery',$gallery->id) }}">Delete</a> 
+                                </td>          
                             </tr>
                             @endforeach
+                            @else
+        <tr>
+            <td colspan="6">Tidak ada data galeri yang ditemukan.</td>
+        </tr>
+    @endif
                         </tbody>
                     </table>
                     <br>
@@ -204,7 +160,7 @@
     <div class="float-right d-none d-sm-block">
       <b>Version</b> 3.1.0
     </div>
-    <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+    <strong>Copyright &copy; 2024 <a href="https://github.com/aliraaswrld">aliraaswrld</a>.</strong> All rights reserved.
   </footer>
 
   <!-- Control Sidebar -->

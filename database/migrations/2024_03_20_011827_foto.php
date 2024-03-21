@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('foto', function (Blueprint $table){
+        Schema::create('foto', function (Blueprint $table) {
             $table->id();
             $table->string('judulFoto', 255);
             $table->text('deskripsiFoto');
-            $table->date('tglUnggah');
             $table->string('lokasiFile', 255);
-     });
+            $table->timestamps();
+        });
     }
 
     /**

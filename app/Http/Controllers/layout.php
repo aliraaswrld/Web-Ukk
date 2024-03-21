@@ -8,24 +8,32 @@ use Illuminate\support\Facades\auth;
 
 class layout extends Controller
 {
-    public function index(){
-    
-        return view('layout.index');
+    public function index()
+    {
+        $gallerys = Gallery::latest()->paginate(8);
+        return view('layout.index', compact('gallerys'));
     }
 
-    public function dashboard(){
-        
-                return view('admin.dashboard', compact('gallerys'));
+    public function dashboard()
+    {
+        $gallerys = Gallery::latest()->paginate(8);
+        return view('admin.dashboard', compact('gallerys'));
     }
 
-public function tambahGallery(){
-    return view('admin.tambahGallery');
-}
+    public function tambahGallery()
+    {
+        return view('admin.tambahGallery');
+    }
 
-    public function tabelGallery(){
-        $user = auth::user();
-        $gallerys = $user->gallery;
+    public function tabelGallery()
+    {
+     
         $gallerys = Gallery::paginate(3);
-        return view ('admin.tabelGallery', compact('gallerys'));
+        return view('admin.tabelGallery', compact('gallerys'));
+    }
+
+    public function editgallery()
+    {
+        return view('admin.editgallery');
     }
 }

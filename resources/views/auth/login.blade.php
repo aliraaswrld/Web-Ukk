@@ -54,6 +54,9 @@
           <div class="col-4">
             <button type="submit" class="btn btn-primary btn-block">Sign In</button>
           </div>
+          <p class="mb-0 text-center" style="margin-top: 10px;">
+    Don't have an account? <a href="{{ route('register') }}" class="text-center">Register here</a>
+</p>
         </div>
       </form>
 

@@ -1,10 +1,124 @@
-.terbaru-section {
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    text-decoration: none;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Poppins", "sans-serif";
+    /* min-height: 4000px; */
+}
+
+
+
+.wallpaper {
+    background-image: url("../images/wallpaper2.jpg");
+    /* Ganti dengan path gambar latar belakang Anda */
+    background-size: auto;
+    background-position: center;
+    background-attachment: fixed;
+    text-align: center;
+    padding: 300px 0;
+}
+
+
+/* Navbar */
+nav {
+    background-color: #a1dcb4;
+    padding: 0.2rem 2%;
+    border-bottom: 1px solid #6d8b71;
+
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo img {
+    width: 120px;
+    height: auto;
+}
+
+.nav-menu {
+    list-style: none;
+    display: flex;
+}
+
+.nav-menu li {
+    margin-right: 20px;
+}
+
+.nav-menu .logout {
+    font-weight: 500;
+    color: #9DC183;
+    cursor: pointer;
+    font-size: 17px;
+    text-decoration: none;
+    background-color: #fff;
+}
+
+.nav-menu li:first-child {
+    margin-left: 0;
+}
+
+.nav-menu a {
+    color:#9DC183;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.nav-menu .register {
+    font-weight: 500;
+    color:#9DC183;
+}
+
+.nav-menu a::after {
+    content: "";
+    display: block;
+    padding-bottom: 0.5rem;
+    border-bottom: 0.1rem solid #9DC183;
+    transform: scaleX(0);
+    transition: 0.2s linear;
+}
+
+.nav-menu a:hover::after {
+    transform: scaleX(0.5);
+}
+
+.nav-menu-toggle {
+    display: none;
+    /* Hide hamburger icon by default */
+}
+
+
+
+
+h2 {
+    padding-top: 3em;
+    padding-right: 7em;
+    padding-left: 5.5em;
+    color: #9DC183;
+}
+.recent-section {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    padding-top: 1em;
-    padding-right: 8em;
+    padding-top: 1rem;
+    margin-right: 20px;
     padding-left: 8em;
+    padding-right: 8em;
 }
 
 .card {
@@ -52,4 +166,95 @@
     padding: 15px;
     background-color: #ffffff;
     border-radius: 0 0 10px 10px;
+}
+
+/* footer */
+footer {
+    background-color: #ffffff;
+    text-align: center;
+    padding: 1rem 0 3rem;
+    margin-top: 3rem;
+}
+
+footer .social {
+    padding: 1rem 0;
+}
+
+footer .social a {
+    color: #9DC183;
+    margin: 1rem;
+}
+
+footer .social a:hover,
+footer .links a:hover {
+    color: #010101;
+}
+
+footer .links {
+    margin-bottom: 1rem;
+    color: #9DC183;
+}
+
+footer .credit {
+    font-size: 1rem;
+    color: #010101;
+}
+
+footer .credit a {
+    color: #9DC183;
+    font-weight: 700;
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+    html {
+        font-size: 65.7%;
+    }
+
+    .logo img {
+        width: 50%;
+        height: auto;
+    }
+
+    .menu li {
+        margin-left: 15px;
+    }
+
+    .menu a {
+        font-size: 15px;
+    }
+}
+
+/* Mobile phone */
+@media (max-width: 450px) {
+    html {
+        font-size: 55%;
+    }
+
+    .logo img {
+        width: 47%;
+        height: auto;
+    }
+
+    .menu li {
+        margin-left: 13px;
+    }
+
+    .menu a {
+        font-size: 10px;
+    }
+
+    .search-box input[type="text"] {
+        padding: 0.3rem;
+        width: 500px;
+        font-size: 13px;
+    }
+
+    button .fas {
+        font-size: 8px;
+    }
+
+    .search-box button {
+        padding: 0.3rem;
+    }
 }

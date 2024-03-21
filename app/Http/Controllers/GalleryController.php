@@ -32,24 +32,15 @@ class GalleryController extends Controller
      */
     public function store(Request $request)
     {
-          $request->validate([
-            'judulFoto' => 'required',
-            'deskripsiFoto' => 'required',
-            'tglUnggah' => 'required',
-            'gallery' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
-        
+
         $data = new Gallery();
-        $data ->id= auth::id();
-        $data ->judulFoto=$request->judulFoto;
-        $data ->deskripsiFoto=$request->deskripsiFoto;
-        $data ->tglUnggah=$request->tglUnggah;
-        $data ->lokasiFile=$request->file('gallery')->store('public/gallery');
-        $data ->save();
 
-        return redirect()->route('admin.tabelGallery');
+        $data->judulFoto = $request->judulFoto;
+        $data->deskripsiFoto = $request->deskripsiFoto;
+        $data->lokasiFile = $request->file('lokasiFile')->store('public/gallery');
+        $data->save();
 
-
+        return redirect()->route('index');
     }
 
     /**
@@ -81,17 +72,15 @@ class GalleryController extends Controller
 
         $data = Gallery::find($id);
 
-        $data ->id= auth::id();
-        $data ->judulFoto=$request->judulFoto;
-        $data ->deskripsiFoto=$request->deskripsiFoto;
-        $data ->tglUnggah=$request->tglUnggah;
-       if ($request->hasFile($data->lokasiFile)){
-        Storage::delete($data->lokasiFile);
-        $data->lokasiFile= $request->file('gallery')->store('public/gallery');
-       }
-        $data ->save();
+        $data->judulFoto = $request->judulFoto;
+        $data->deskripsiFoto = $request->deskripsiFoto;
+        if ($request->hasFile('lokasiFile')) {
+            Storage::delete($data->lokasiFile);
+            $data->lokasiFile = $request->file('gallery')->store('public/gallery');
+        }
+        $data->save();
 
-        return redirect()->route('tabelGallery');
+        return redirect()->route('admin.tabelGallery');
     }
 
     /**
@@ -102,6 +91,6 @@ class GalleryController extends Controller
         //
         $data = Gallery::find($id)->delete();
 
-        return redirect()->route('tabelGallery');
+        return redirect()->route('admin.tabelGallery');
     }
 }
